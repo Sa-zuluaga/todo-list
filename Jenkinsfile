@@ -40,7 +40,7 @@ pipeline {
             steps{
                 script{
                     bat 'docker login'
-                    bat 'docker build -t todolist .'
+                    bat 'docker build -t sazuluaga/todolist .'
                     }
                 }
             }
