@@ -17,7 +17,7 @@ pipeline {
         }
        stage('Sonar') {
             steps{
-                withSonarQubeEnv('sonarJenkins'){
+                withSonarQubeEnv('SonarCloud'){
                     bat 'gradlew sonar'
                 }
            }
