@@ -47,7 +47,7 @@ pipeline {
        stage('Push Image') {
             steps{
                 script{
-                    bat 'docker docker push sazuluaga/todolist:latest'
+                    bat 'docker push sazuluaga/todolist:latest'
                     }
                 }
             }
