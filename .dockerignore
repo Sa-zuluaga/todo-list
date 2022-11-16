@@ -1,0 +1,14 @@
+#Ignoring folders
+.git
+.gradle
+.idea
+
+
+#Ignoring files
+**/*.class
+
+*.dockerignore
+*.gitignore
+Dockerfile
+LICENSE
+*.md
