@@ -7,8 +7,6 @@ RUN mkdir -p /home/todolist
 
 COPY build/libs/todolist-0.0.1-SNAPSHOT.jar /home/todolist/todolist.jar
 
-RUN ls /home/todolist
-
 WORKDIR /home/todolist
 
 EXPOSE 8400

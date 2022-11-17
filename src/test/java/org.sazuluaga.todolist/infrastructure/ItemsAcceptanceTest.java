@@ -3,7 +3,6 @@ package org.sazuluaga.todolist.infrastructure;
 
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -120,38 +119,39 @@ class ItemsAcceptanceTest {
 
     @Test
     void shouldUpdateAItemSuccesfully() {
-    when(itemRepository.getItemById(anyLong())).thenReturn(toDoItemOut);
-    when(itemRepository.updateItem(any(ToDoItem.class))).thenReturn(toDoItemOut);
-    ToDoItemInfra toDoItemInfra = ToDoItemInfra.builder()
-            .description("lavar el piso")
-            .done(false)
-            .build();
-    given().contentType(ContentType.JSON)
-            .body(toDoItemInfra)
-            .when()
-            .put(String.format("http://localhost:%s/lists/1/items/1", port))
-            .then()
-            .statusCode(200)
-            .body(containsString("1"))
-            .body(containsString("lavar el piso"));
+        when(itemRepository.getItemById(anyLong())).thenReturn(toDoItemOut);
+        when(itemRepository.updateItem(any(ToDoItem.class))).thenReturn(toDoItemOut);
+        ToDoItemInfra toDoItemInfra = ToDoItemInfra.builder()
+                .description("lavar el piso")
+                .done(false)
+                .build();
+        given().contentType(ContentType.JSON)
+                .body(toDoItemInfra)
+                .when()
+                .put(String.format("http://localhost:%s/lists/1/items/1", port))
+                .then()
+                .statusCode(200)
+                .body(containsString("1"))
+                .body(containsString("lavar el piso"));
     }
+
     @Test
     void shouldUpdateAItemWithoutDescriptionAndReturnStatusCode200() {
 
-    when(itemRepository.getItemById(anyLong())).thenReturn(toDoItemOut);
-    when(itemRepository.updateItem(any(ToDoItem.class))).thenReturn(toDoItemOut);
-    ToDoItemInfra toDoItemInfra = ToDoItemInfra.builder()
-            .description(null)
-            .done(false)
-            .build();
-    given().contentType(ContentType.JSON)
-            .body(toDoItemInfra)
-            .when()
-            .put(String.format("http://localhost:%s/lists/1/items/1", port))
-            .then()
-            .statusCode(200)
-            .body(containsString("1"))
-            .body(containsString("lavar ropita"));
+        when(itemRepository.getItemById(anyLong())).thenReturn(toDoItemOut);
+        when(itemRepository.updateItem(any(ToDoItem.class))).thenReturn(toDoItemOut);
+        ToDoItemInfra toDoItemInfra = ToDoItemInfra.builder()
+                .description(null)
+                .done(false)
+                .build();
+        given().contentType(ContentType.JSON)
+                .body(toDoItemInfra)
+                .when()
+                .put(String.format("http://localhost:%s/lists/1/items/1", port))
+                .then()
+                .statusCode(200)
+                .body(containsString("1"))
+                .body(containsString("lavar ropita"));
     }
 
 
@@ -171,25 +171,26 @@ class ItemsAcceptanceTest {
                 .body(containsString("1"))
                 .body(containsString("limpiar basura"));
     }
+
     @Test
     void shouldDeleteAItemSuccesful() {
-    when(itemRepository.getItemById(anyLong())).thenReturn(toDoItemOut);
-    given().contentType(ContentType.JSON)
-            .when()
-            .delete(String.format("http://localhost:%s/lists/1/items/1", port))
-            .then()
-            .statusCode(200);
+        when(itemRepository.getItemById(anyLong())).thenReturn(toDoItemOut);
+        given().contentType(ContentType.JSON)
+                .when()
+                .delete(String.format("http://localhost:%s/lists/1/items/1", port))
+                .then()
+                .statusCode(200);
     }
 
     @Test
     void shouldNotDeleteAItemAndReturnStatusCode400() {
-    when(itemRepository.getItemById(2L)).thenReturn(toDoItemOut);
-    given().contentType(ContentType.JSON)
-            .when()
-            .delete(String.format("http://localhost:%s/lists/1/items/1", port))
-            .then()
-            .statusCode(400)
-            .body(containsString("Couldn't find the item"));
+        when(itemRepository.getItemById(2L)).thenReturn(toDoItemOut);
+        given().contentType(ContentType.JSON)
+                .when()
+                .delete(String.format("http://localhost:%s/lists/1/items/1", port))
+                .then()
+                .statusCode(400)
+                .body(containsString("Couldn't find the item"));
     }
 }
 
